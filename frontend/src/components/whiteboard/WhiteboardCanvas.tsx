@@ -49,6 +49,34 @@ export const WhiteboardCanvas: React.FC<WhiteboardCanvasProps> = ({
   const [draggedElementId, setDraggedElementId] = useState<string | null>(null);
   const [dragOffset, setDragOffset] = useState<Point>({ x: 0, y: 0 });
 
+  const [isSpacePressed, setIsSpacePressed] = useState(false);
+
+  useEffect(() => {
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if (
+        e.code === 'Space' &&
+        !e.repeat &&
+        !(
+          e.target instanceof HTMLInputElement ||
+          e.target instanceof HTMLTextAreaElement
+        )
+      ) {
+        setIsSpacePressed(true);
+      }
+    };
+    const handleKeyUp = (e: KeyboardEvent) => {
+      if (e.code === 'Space') {
+        setIsSpacePressed(false);
+      }
+    };
+    window.addEventListener('keydown', handleKeyDown);
+    window.addEventListener('keyup', handleKeyUp);
+    return () => {
+      window.removeEventListener('keydown', handleKeyDown);
+      window.removeEventListener('keyup', handleKeyUp);
+    };
+  }, []);
+
   // Inline text editing state
   const [editingTextElement, setEditingTextElement] = useState<{
     id: string;
@@ -159,8 +187,8 @@ export const WhiteboardCanvas: React.FC<WhiteboardCanvasProps> = ({
       onCursorMove(pos.x, pos.y);
     }
 
-    // Pan canvas with middle mouse or hand tool
-    if (e.button === 1 || activeTool === 'hand' || e.spaceKey) {
+    // Pan canvas with middle mouse, hand tool, or holding spacebar
+    if (e.button === 1 || activeTool === 'hand' || isSpacePressed) {
       setIsPanning(true);
       setPanStart({ x: e.clientX - appState.scrollX, y: e.clientY - appState.scrollY });
       return;
@@ -734,7 +762,7 @@ export const WhiteboardCanvas: React.FC<WhiteboardCanvasProps> = ({
       }`}
       style={{
         cursor:
-          activeTool === 'hand' || isPanning
+          activeTool === 'hand' || isPanning || isSpacePressed
             ? 'grab'
             : activeTool === 'select'
             ? 'default'
