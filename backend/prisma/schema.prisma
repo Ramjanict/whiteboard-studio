@@ -1,0 +1,28 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model Drawing {
+  id                 String   @id @default(uuid())
+  shortId            Int      @unique @default(autoincrement())
+  title              String   @default("Untitled Board")
+  description        String?
+  category           String   @default("shape")
+  imageUrl           String   @db.Text
+  thumbnailUrl       String?  @db.Text
+  cloudinaryPublicId String?
+  elements           Json     @default("[]")
+  appState           Json?
+  isSample           Boolean  @default(false)
+  createdAt          DateTime @default(now())
+  updatedAt          DateTime @updatedAt
+
+  @@index([category])
+  @@index([isSample])
+  @@index([createdAt])
+}
