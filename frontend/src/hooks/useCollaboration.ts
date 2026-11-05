@@ -55,7 +55,9 @@ export function useCollaboration(
     setCurrentUser({ id: userId, name: storedName, color: storedColor });
 
     // Connect to WebSocket gateway
-    const socketUrl = process.env.NEXT_PUBLIC_WS_URL || 'http://localhost:8080/collaboration';
+    const socketUrl =
+      process.env.NEXT_PUBLIC_WS_URL ||
+      'https://whiteboard-studio-c21b.onrender.com/collaboration';
     const socket = io(socketUrl, {
       transports: ['websocket', 'polling'],
       autoConnect: true,

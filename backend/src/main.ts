@@ -18,8 +18,10 @@ async function bootstrap() {
     credentials: true,
   });
 
-  // Global API Routing Prefix
-  app.setGlobalPrefix('api');
+  // Global API Routing Prefix (exclude root '/' for health checks & info)
+  app.setGlobalPrefix('api', {
+    exclude: ['/'],
+  });
 
   // Global Architectural Pipes & Interceptors
   app.useGlobalPipes(

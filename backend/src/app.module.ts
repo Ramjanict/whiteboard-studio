@@ -5,6 +5,7 @@ import { CloudinaryModule } from './cloudinary/cloudinary.module';
 import { DrawingsModule } from './drawings/drawings.module';
 import { HealthModule } from './health/health.module';
 import { CollaborationModule } from './collaboration/collaboration.module';
+import { AppController } from './app.controller';
 
 @Module({
   imports: [
@@ -18,5 +19,6 @@ import { CollaborationModule } from './collaboration/collaboration.module';
     HealthModule,
     CollaborationModule,
   ],
+  controllers: [AppController],
 })
 export class AppModule {}

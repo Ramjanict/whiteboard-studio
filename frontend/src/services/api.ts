@@ -1,6 +1,8 @@
 import { DrawingDocument } from '@/types/whiteboard';
 
-const API_BASE = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:8080/api';
+const API_BASE =
+  process.env.NEXT_PUBLIC_API_URL ||
+  'https://whiteboard-studio-c21b.onrender.com/api';
 
 export interface ApiResponse<T> {
   success: boolean;
