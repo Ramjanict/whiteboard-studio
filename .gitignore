@@ -3,11 +3,7 @@ node_modules/
 **/node_modules/
 
 # Environment files - NEVER commit secrets to GitHub
-.env
-.env.*
 .env*.local
-**/.env
-**/.env.*
 **/.env*.local
 
 # Allow example templates
@@ -31,7 +27,7 @@ yarn-error.log*
 # OS & Editor
 .DS_Store
 Thumbs.db
-.vscode/
 .idea/
 
 .vercel
+config.bat

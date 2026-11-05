@@ -11,11 +11,97 @@
 ![Cloudinary](https://img.shields.io/badge/Cloudinary%20CDN-3448C5?style=for-the-badge&logo=cloudinary&logoColor=white)
 ![Tailwind CSS](https://img.shields.io/badge/Tailwind%20CSS-38B2AC?style=for-the-badge&logo=tailwind-css&logoColor=white)
 
-**A production-grade, full-stack collaborative digital whiteboard engineered with Next.js 14, TypeScript, NestJS, Neon Serverless PostgreSQL, Prisma ORM, Cloudinary, and Socket.IO.**
+[![Frontend Deployment](https://img.shields.io/badge/Frontend-Live%20on%20Vercel-success?style=flat-square&logo=vercel)](https://yourwhiteboard.vercel.app/)
+[![Backend Deployment](https://img.shields.io/badge/Backend-Live%20on%20Render-informational?style=flat-square&logo=render)](https://whiteboard-studio-c21b.onrender.com/)
+[![Swagger Docs](https://img.shields.io/badge/Swagger-OpenAPI%203.0-85EA2D?style=flat-square&logo=swagger&logoColor=black)](https://whiteboard-studio-c21b.onrender.com/api/docs)
+[![Database](https://img.shields.io/badge/Database-Neon%20Serverless%20Pooler-00E599?style=flat-square&logo=postgresql&logoColor=black)](https://whiteboard-studio-c21b.onrender.com/api/health)
 
-[Features](#-key-features) • [Architecture](#-system-architecture) • [Tech Stack](#-technology-stack) • [Database Schema](#-database-architecture) • [API Contracts](#-api-specification) • [Local Setup](#-getting-started) • [Shortcuts](#-keyboard-shortcuts)
+**A production-grade, full-stack collaborative digital whiteboard engineered with Next.js 14, TypeScript, NestJS 10, Neon Serverless PostgreSQL, Prisma ORM, Cloudinary, and Socket.IO.**
+
+[Live Application](https://yourwhiteboard.vercel.app/) • [Swagger API Docs](https://whiteboard-studio-c21b.onrender.com/api/docs) • [Visual Showcase](#-visual-interface-tour) • [Architecture](#-system-architecture) • [API Specification](#-api-specification) • [Local Setup](#-getting-started)
 
 </div>
+
+---
+
+## 🌐 Live Production Deployments
+
+The application is deployed across global production infrastructure with automated continuous delivery:
+
+| Service | Environment / Platform | Direct URL | Status |
+| :--- | :--- | :--- | :---: |
+| **Frontend Web App** | Vercel Edge Network | [https://yourwhiteboard.vercel.app/](https://yourwhiteboard.vercel.app/) | ![Active](https://img.shields.io/badge/Operational-brightgreen?style=flat-square) |
+| **Backend API Gateway** | Render Cloud Web Service | [https://whiteboard-studio-c21b.onrender.com/](https://whiteboard-studio-c21b.onrender.com/) | ![Active](https://img.shields.io/badge/Operational-brightgreen?style=flat-square) |
+| **Swagger OpenAPI 3.0** | Interactive Documentation | [https://whiteboard-studio-c21b.onrender.com/api/docs](https://whiteboard-studio-c21b.onrender.com/api/docs) | ![Interactive](https://img.shields.io/badge/v2.1.0-blue?style=flat-square) |
+| **System & DB Health** | Diagnostics & Latency Probe | [https://whiteboard-studio-c21b.onrender.com/api/health](https://whiteboard-studio-c21b.onrender.com/api/health) | ![SSL Pooled](https://img.shields.io/badge/Neon_DB-Sub--15ms-00E599?style=flat-square) |
+| **WebSocket Gateway** | Socket.IO Live Stream | `wss://whiteboard-studio-c21b.onrender.com/collaboration` | ![Realtime](https://img.shields.io/badge/40Hz-Low_Latency-purple?style=flat-square) |
+
+---
+
+## 📸 Visual Interface Tour
+
+Experience the core features and developer architecture of Whiteboard Studio through high-resolution screenshots of the production software:
+
+### 1. High-Performance Vector Canvas & Studio Workspace
+The primary canvas workspace combines a distraction-free dark interface with an 11-tool palette, coordinate space transformation engine ($0.2\times$ to $3.0\times$ zoom and infinite pan), live Neon PostgreSQL status indicator, real-time minimap radar, and floating property inspector.
+
+![Whiteboard Studio Workspace](frontend/public/hero-workspace.png)
+
+* **Key Highlights**:
+  * **11 Interactive Tools**: Select (`V`), Hand Pan (`H`), Rectangle (`R`), Circle (`C`), Diamond (`D`), Arrow (`A`), Line (`L`), Freehand Pencil (`P`), Text (`T`), Sticky Note (`S`), and Eraser (`E`).
+  * **Retina High-DPI Scaling**: Pixel-perfect rendering matching `window.devicePixelRatio` with zero blurriness.
+  * **Floating Properties Panel**: Real-time adjustment of stroke colors, fill swatches, stroke widths (2px, 4px, 8px), opacity, and element layering.
+  * **Radar Minimap**: Semi-transparent viewport radar in the bottom-left corner with real-time viewport bounding box projection.
+
+---
+
+### 2. Real-Time Multiplayer Collaboration & Presence
+Multi-user collaborative session powered by NestJS WebSockets and Socket.IO. Changes, moves, and remote cursors are relayed instantaneously across all active participants in isolated rooms.
+
+![Multiplayer Collaboration Session](frontend/public/realtime-collaboration.png)
+
+* **Key Highlights**:
+  * **Throttled 40Hz Cursor Streaming**: High-frequency, low-bandwidth cursor coordinate transmission with colored pointer triangles and custom user nametags.
+  * **Active Selection Bounding Box**: Dashed transformation handles indicating which collaborator is currently repositioning or editing a shape.
+  * **Live Activity Feed**: Sidebar tracking participant joins, edits, sticky note placements, and connector updates with timestamped audit logs.
+  * **Presence Indicators**: Active collaborator avatar stack in the top header displaying online team members.
+
+---
+
+### 3. Neon Serverless PostgreSQL Cloud Drawings Library
+Unified drawing management modal displaying boards persisted in Neon PostgreSQL and rasterized to Cloudinary CDN.
+
+![Cloud Drawings Library](frontend/public/cloud-gallery.png)
+
+* **Key Highlights**:
+  * **Dual Storage Engine**: Offscreen visual snapshots stored on Cloudinary CDN paired with complete vector element JSON trees in Neon PostgreSQL.
+  * **Human-Readable Short IDs**: Quick lookups using numeric badges (e.g., `#1`, `#2`, `#3`) alongside UUID primary keys.
+  * **Instant Filter Pills**: Categorize boards by *Architecture*, *Authentication*, *Database ERD*, or *Design Systems*.
+  * **One-Click Actions**: Immediate canvas loading, direct high-resolution PNG export, and secure deletion.
+
+---
+
+### 4. Interactive NestJS Swagger OpenAPI 3.0 Documentation
+Production API documentation explorer hosted at `/api/docs`, providing live testing, parameter definitions, and RFC-compliant JSON responses.
+
+![Swagger OpenAPI 3.0 Documentation](frontend/public/swagger-api-docs.png)
+
+* **Key Highlights**:
+  * **Complete Endpoint Coverage**: Interactive definitions for `/api/drawings` (CRUD), `/api/drawings/upload-image` (Cloudinary multipart buffer), `/api/health` (diagnostics), and `/collaboration` (WebSockets).
+  * **Strongly-Typed DTOs**: Strict request validation powered by `class-validator` and `class-transformer`.
+  * **Uniform Response Envelopes**: Interceptor-standardized format `{ success, statusCode, data, timestamp }` on all endpoints.
+
+---
+
+### 5. Production End-to-End System Architecture Blueprint
+Architectural diagram illustrating the separation of concerns across the Vercel Edge client tier, Render NestJS API gateway, Neon Serverless PostgreSQL, and Cloudinary media CDN.
+
+![System Architecture Blueprint](frontend/public/system-architecture.png)
+
+* **Key Highlights**:
+  * **Decoupled Architecture**: Clean architectural boundaries between Client, Gateway, and Persistence layers.
+  * **Network Protocols**: Encrypted communication utilizing HTTPS REST for API operations, WSS for WebSockets, and SSL connection pooling for database queries.
+  * **Automated Self-Healing DB**: Automatic initialization of missing tables and indexes on backend startup via `ensureTablesExist()`.
 
 ---
 
@@ -129,8 +215,8 @@ flowchart TD
 | **Styling & UI** | Tailwind CSS + shadcn/ui | `3.4.x` | Responsive design, dark/light themes, Radix primitives |
 | **Icons & Notifications** | Lucide React + Sonner | `0.441.x` | Iconography and toast feedback system |
 | **Backend Framework** | NestJS | `10.4.x` | Modular architecture, dependency injection, controllers |
-| **Database ORM** | Prisma | `5.19.x` | Type-safe queries, migrations, and relationship handling |
-| **Database Engine** | PostgreSQL (Neon DB) | Serverless | Cloud-native pooled PostgreSQL with SSL encryption |
+| **Database ORM** | Prisma | `5.22.x` | Type-safe queries, migrations, and relationship handling |
+| **Database Engine** | PostgreSQL (Neon DB) | Serverless v16 | Cloud-native pooled PostgreSQL with SSL encryption |
 | **Real-Time Gateway** | Socket.IO | `4.7.x` | Low-latency WebSockets for multi-user collaboration |
 | **Cloud Media Storage** | Cloudinary SDK | `2.5.x` | Image transformation, optimization, and CDN delivery |
 | **API Documentation** | Swagger / OpenAPI | `7.4.x` | Interactive API documentation at `/api/docs` |
@@ -232,7 +318,8 @@ Whiteboard-App/
 │   │   │   ├── drawings.controller.ts
 │   │   │   ├── drawings.service.ts
 │   │   │   └── drawings.module.ts
-│   │   ├── prisma/             # Global Prisma Client Provider
+│   │   ├── prisma/             # Global Prisma Client Provider & Table Self-Healing
+│   │   ├── app.controller.ts   # Root Health Endpoint (GET / & HEAD /)
 │   │   ├── app.module.ts       # Root NestJS Module
 │   │   └── main.ts             # App Bootstrap (Swagger, CORS, Pipes)
 │   ├── .env.example            # Backend environment template
@@ -240,7 +327,12 @@ Whiteboard-App/
 │   └── tsconfig.json
 │
 ├── frontend/
-│   ├── public/                 # Static assets, SVG branding
+│   ├── public/                 # Showcase screenshots, vector SVG assets
+│   │   ├── hero-workspace.png
+│   │   ├── realtime-collaboration.png
+│   │   ├── cloud-gallery.png
+│   │   ├── swagger-api-docs.png
+│   │   └── system-architecture.png
 │   ├── src/
 │   │   ├── app/
 │   │   │   ├── globals.css     # CSS variables, grid lines & dot patterns
@@ -257,6 +349,7 @@ Whiteboard-App/
 │   ├── .env.example            # Frontend environment template
 │   ├── tailwind.config.ts
 │   ├── next.config.mjs
+│   ├── vercel.json
 │   └── package.json
 │
 └── README.md                   # Complete Project Documentation
@@ -368,6 +461,9 @@ cd Whiteboard-App
 **Md Ramjan Ali**  
 *Full-Stack Software Engineer*  
 
+* **Live Demo (Frontend)**: [https://yourwhiteboard.vercel.app/](https://yourwhiteboard.vercel.app/)
+* **Live API (Backend)**: [https://whiteboard-studio-c21b.onrender.com/](https://whiteboard-studio-c21b.onrender.com/)
+* **Swagger API Docs**: [https://whiteboard-studio-c21b.onrender.com/api/docs](https://whiteboard-studio-c21b.onrender.com/api/docs)
 * **GitHub**: [@Ramjanict](https://github.com/Ramjanict)  
 * **Email**: [mdramjan.ict@gmail.com](mailto:mdramjan.ict@gmail.com)  
 * **Project Repository**: [https://github.com/Ramjanict/Whiteboard-App](https://github.com/Ramjanict/Whiteboard-App)  
